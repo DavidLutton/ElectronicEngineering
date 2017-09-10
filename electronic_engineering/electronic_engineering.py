@@ -576,3 +576,21 @@ def ratioP_as_dB(ratio):
 
 def dB_as_ratio_of_P(dB):
     return 10.**(dB/10.)
+
+
+def waveguide_horn_gain(frequency, flaredflangebroad, flaredflangenarrow):
+    # frequency = 1e9
+    # broad = float(input('Flared flange dimension(broad) in mm : ')) / 1e3
+    # narrow = float(input('Flared flange dimension(narrow) in mm : ')) / 1e3
+    broad = broad / 1e3
+    narrow = narrow / 1e3
+
+    area = narrow * broad
+    factor = 300000000 / frequency  # 3*10e8
+    gain = 10 * log10((10 * area) / (factor**2))
+    return {
+        'Gain [dB]': gain,
+        'vertical_beamwidth [deg]': (51 * factor)/narrow,
+        'horizontal_beamwidth [deg]': (70 * factor)/broad,
+
+    }
