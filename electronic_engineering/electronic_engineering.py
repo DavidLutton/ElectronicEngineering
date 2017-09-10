@@ -88,6 +88,10 @@ def log(value):
     return np.log(value)
 
 
+def test_log():
+    assert log(np.pi) == 1.1447298858494002
+
+
 # @functools.lru_cache(maxsize=1024, typed=False)
 def log10(value):
     """.
@@ -119,7 +123,7 @@ def log20(value):
 
 
 def test_log20():
-    assert log20(np.pi) == 0.38212022347756341  # https://www.wolframalpha.com/input/?i=log20(pi)
+    assert log20(np.pi) == 0.38212022347756341
     assert log20(50) == 1.3058653605207224
     assert log20(10) == 0.76862178684024096
 
@@ -530,6 +534,10 @@ def ratioV_as_dB(ratio):
     return Q_(20*log10(ratio), 'dB')
 
 
+def dB_as_ratio_of_V(dB):
+    return 10.**(dB/20.)
+
+
 def ratioA_as_dB(ratio):
     """Calculate the dB equivalent of the current ratio."""
 
@@ -564,3 +572,7 @@ def ratioP_as_dB(ratio):
 
     Useful for correcting readings from rf power heads"""
     return Q_(10*log10(ratio), 'dB')
+
+
+def dB_as_ratio_of_P(dB):
+    return 10.**(dB/10.)
