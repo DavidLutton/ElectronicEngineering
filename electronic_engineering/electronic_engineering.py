@@ -594,3 +594,50 @@ def waveguide_horn_gain(frequency, flaredflangebroad, flaredflangenarrow):
         'horizontal_beamwidth [deg]': (70 * factor)/broad,
 
     }
+
+
+class Trace(object):
+    """."""
+
+    def interpolate(self, frequency):
+        """For a given frequency provide the factor."""
+        return NotImplemented
+
+    @property
+    def dataframe(self):
+        """Pandas dataframe of the data."""
+        return NotImplemented
+
+    @dataframe.setter
+    def dataframe(self, dataframe):
+        return NotImplemented
+
+
+class TraceLog(Trace):
+    """."""
+    def __init__(self, points=801, start=300e3, stop=6e9, *, yaxis=False):
+        self.xaxis = np.geomspace(start, stop, points)
+        if yaxis is not False:
+            self.yaxis = yaxis
+
+
+class TraceLin(Trace):
+    """."""
+    def __init__(self, points=801, start=300e3, stop=6e9, *, yaxis=False):
+        self.xaxis = np.linspace(start, stop, points)
+        if yaxis is not False:
+            self.yaxis = yaxis
+
+
+class TraceDefined(Trace):
+    """."""
+    def __init__(self, points=[100e3, 300e3, ], *, yaxis=False):
+        self.xaxis = points
+        if yaxis is not False:
+            self.yaxis = yaxis
+
+
+'''trace = TraceDefined(points=[100e3, 300e3, 1e6], yaxis=[5, 4, 6])
+print(trace.xaxis)
+pprint(dir(trace))
+'''
