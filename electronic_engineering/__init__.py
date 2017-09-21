@@ -5,3 +5,5 @@
 __author__ = """David Lutton"""
 __email__ = 'david@dalun.space'
 __version__ = '0.1.0'
+
+from electronic_engineering import * 
