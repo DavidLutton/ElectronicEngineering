@@ -3,9 +3,15 @@
 """Main module."""
 
 import functools
+import os
+import shutil
+
+from uuid import uuid4 as uuid  # https://docs.python.org/3.4/library/uuid.html
+from pprint import pprint
+
 import pint
 import numpy as np
-from pprint import pprint
+
 
 ureg = pint.UnitRegistry()
 ureg.default_format = '~P'
@@ -460,6 +466,13 @@ def test_IPV():
 
 
 def PVI(V, I):  # P=V*I
+    """.
+
+    .. math::
+
+        Power = Voltage * Current
+
+     """
     return((V * I).to(ureg.watt))
 
 
@@ -586,7 +599,7 @@ def waveguide_horn_gain(frequency, flaredflangebroad, flaredflangenarrow):
     narrow = narrow / 1e3
 
     area = narrow * broad
-    factor = 300000000 / frequency  # 3*10e8
+    factor = 3e8 / frequency  # 300000000
     gain = 10 * log10((10 * area) / (factor**2))
     return {
         'Gain [dB]': gain,
@@ -640,4 +653,152 @@ class TraceDefined(Trace):
 '''trace = TraceDefined(points=[100e3, 300e3, 1e6], yaxis=[5, 4, 6])
 print(trace.xaxis)
 pprint(dir(trace))
+'''
+
+
+class Waveguide:
+    """Concept."""
+
+    _data = [
+        {
+            'EIA': 'WR15',
+            'IEC': 'R620',
+            'RSCS': 'WG25',
+            'NomiminalFrequency': [50e9, 75e9],
+            'LowCutoff': 39.875e9,
+            'HighCutoff': 79.75e9,
+            'Width': 3.7592,
+            'Height': 1.8796,
+        }
+    ]
+
+
+class HarmonicMixer:
+    """."""
+
+    def LO(frequency, harmonic, IF=310.7e6):
+        """Calculate LO for HarmonicMixer.
+
+        :param frequency: Target center frequency
+        :param harmonic: Harmonic of mixer
+        :param IF: IF frequency
+        :returns: Frequency for LO source
+        """
+        return (frequency - IF) / harmonic
+
+    def RF(LO, harmonic, IF=310.7e6):
+        """Calculate RF frequency.
+
+        :param LO: LO frequency
+        :param harmonic: Harmonic of mixer
+        :returns: Frequency of RF signal
+        """
+        return (LO * harmonic) + IF
+
+
+class SourceMultiplier:
+    """."""
+
+    def sourcefrequency_given_frequency_multiplier(frequency, multiplier):
+        """."""
+        return frequency / multiplier
+
+    def outputfrequency_given_frequency_multiplier(frequency, multiplier):
+        """."""
+        return frequency * multiplier
+
+
+'''data = 6000e6
+representation = []
+for each in 9, 6, 3, 1:
+    res = data / float('1e{}'.format(each))
+    representation.append('{}e{}'.format(res, each))
+# print(representation)
+representation = sorted(representation, key=len)[0]
+print(representation)
+
+
+'''
+
+
+class FrequencyLockstep(object):
+    """."""
+
+    '''def __repr__(self):
+        """."""
+        return "{}, {}".format(__class__, self.instrument)
+    '''
+
+    # def __init__(self, arrayofinstruments):
+    # instrument calculatorfunction fixedinputs
+
+    @property
+    def frequency(self):
+        """."""
+        pass
+
+    @frequency.setter
+    def frequency(self, frequency):
+        pass
+
+
+# print(datetime.isoformat(datetime.utcnow(),sep='T'))
+
+'''
+from tkinter import Tk
+
+
+class clipboard(object):
+    """Retrieve and set content with clipboard."""
+
+    def read():
+        """Get a copy of the contents of the clipboard.
+
+        :returns: copy of the clipboard
+        """
+        root = Tk()
+        root.withdraw()
+        return(root.clipboard_get())
+
+    def write(content):
+        """Write content ot the clipboard.
+
+        :param content: to be written to clipboard
+        """
+        r = Tk()
+        r.withdraw()
+        r.clipboard_clear()
+
+        r.clipboard_append(content)
+        r.destroy()
+'''
+'''
+def get(file):
+   with open(file, "r") as ifile:
+      for line in ifile:
+         if not line:
+            break
+         yield line
+'''
+
+
+class tmp():
+    """."""
+
+    def __init__(self):
+        """."""
+        self.tmp = os.path.expanduser("~" + os.sep + os.path.join("Local Settings", "Temp")) + os.sep + str(uuid())
+        print(self.tmp)
+        if not os.path.exists(self.tmp):
+            os.mkdir(self.tmp)
+
+    def __del__(self):
+        """."""
+        print(self.tmp)
+        r = shutil.rmtree(self.tmp)
+
+
+'''tmp1 = tmp()
+print(tmp1.tmp)
+del(tmp1)
 '''
