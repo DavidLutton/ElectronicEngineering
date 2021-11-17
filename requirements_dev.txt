@@ -2,5 +2,5 @@ flake8
 tox
 coverage
 Sphinx
-PyYAML
+PyYAML==6.0
 pytest
