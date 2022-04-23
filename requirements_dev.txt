@@ -3,4 +3,4 @@ tox
 coverage
 Sphinx
 PyYAML
-pytest
+pytest==7.1.2
