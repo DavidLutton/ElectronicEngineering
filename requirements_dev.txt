@@ -1,5 +1,5 @@
 flake8
-tox
+tox==4.2.3
 coverage
 Sphinx
 PyYAML
