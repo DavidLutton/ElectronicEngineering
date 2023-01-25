@@ -1,6 +1,6 @@
 flake8
 tox
-coverage
+coverage==7.1.0
 Sphinx
 PyYAML
 pytest
