@@ -7,8 +7,8 @@ import pytest
 
 from click.testing import CliRunner
 
-from electronic_engineering import electronic_engineering
-from electronic_engineering import cli
+from src import electronic_engineering
+from src import cli
 
 
 @pytest.fixture
