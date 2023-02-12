@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+# [tool.setuptools.dynamic]
+# version = {attr = "ElectronicEngineering.__version__"}
+
+# [tool.setuptools.packages.find]
+# where = ["src"]  # list of folders that contain the packages (["."] by default)
+# include = ["ElectronicEngineering*"]  # package names should match these glob patterns (["*"] by default)
+# exclude = ["ElectronicEngineering.tests*"]  # exclude packages matching these glob patterns (empty by default)
+# namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+
+[project]   
+name = "ElectronicEngineering"
+authors = [
+  { name="David Lutton", email="david@dalun.space" },
+]
+description = "RF/EM formulas and ..."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+# dynamic = ["version"]
+version = "0.1.0"
+
+[project.urls]
+"Homepage" = "https://github.com/DavidLutton/ElectronicEngineering"
+"Bug Tracker" = "https://github.com/DavidLutton/ElectronicEngineering/issues"
